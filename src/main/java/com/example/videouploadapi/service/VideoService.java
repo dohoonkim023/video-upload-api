@@ -24,6 +24,7 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class VideoService {
     private final ResizeService resizeService;
+    private final ThumbnailService thumbnailService;
 
     private final UploadRepository uploadRepository;
 
@@ -64,6 +65,7 @@ public class VideoService {
 //                    }
 //                }
 //        );
+        final CompletableFuture<String> thumnailResult =  thumbnailService.createThumbnail(originalVideoPath, resizedFileName);
     }
 
 
