@@ -43,8 +43,8 @@ public class ResizeService {
 
         FFmpegBuilder builder = new FFmpegBuilder()
                 .overrideOutputFiles(true)
-                .setInput(originalVideoPath)// 영상에서 추출하고자 하는 시간 - 00:00:01은 1초를 의미
-                .addOutput(resizedVideoPath)        // 저장 절대 경로(확장자 미 지정 시 예외 발생 - [NULL @ 000002cc1f9fa500] Unable to find a suitable output format for 'C:/Users/Desktop/test')
+                .setInput(originalVideoPath)
+                .addOutput(resizedVideoPath)
                 .setVideoWidth(resizedWidth)
                 .setVideoHeight(resizedHeight)
                 .done();

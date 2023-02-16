@@ -1,23 +1,17 @@
 package com.example.videouploadapi.api;
 
+import com.example.videouploadapi.dto.VideoInfolDto;
 import com.example.videouploadapi.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
-import java.util.UUID;
 
 @RequestMapping("/video")
 @RequiredArgsConstructor
@@ -31,8 +25,7 @@ public class VideoController {
 
     @PostMapping
     public ResponseEntity<?> uploadVideo(@RequestParam("file") MultipartFile multipartFile,
-                              @RequestParam("title") String title) throws IOException {
-        log.info("title: {}", title);
+                                         @RequestParam("title") String title) throws IOException {
         if (!Objects.equals(multipartFile.getContentType(), CONTENT_TYPE)) {
             return new ResponseEntity<>("Invalid content-type", new HttpHeaders(), HttpStatus.BAD_REQUEST);
         }
@@ -41,4 +34,8 @@ public class VideoController {
         return ResponseEntity.ok("Success");
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getVideoDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(videoService.getVideoInfo(id));
+    }
 }

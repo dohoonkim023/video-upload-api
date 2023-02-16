@@ -1,5 +1,6 @@
 package com.example.videouploadapi.service;
 
+import com.example.videouploadapi.dto.VideoInfolDto;
 import com.example.videouploadapi.persist.entity.Upload;
 import com.example.videouploadapi.persist.repository.UploadRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -62,10 +64,7 @@ public class VideoService {
 //                    }
 //                }
 //        );
-
-
     }
-
 
 
     private void uploadVideoToServer(MultipartFile multipartFile, String fileName) {
@@ -94,6 +93,15 @@ public class VideoService {
 //        log.info("width : {} px", probeResult.getStreams().get(0).width);
 //        log.info("height : {} px", probeResult.getStreams().get(0).height);
 //        log.info("===================================================");
+    }
+
+    public VideoInfolDto getVideoInfo(Long id) {
+        Upload upload = uploadRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No Found"));
+
+        return new VideoInfolDto(upload);
+
+
     }
 
     // 썸네일
