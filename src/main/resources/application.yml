@@ -1,7 +1,19 @@
 spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+
   thymeleaf:
     suffix: .html
     prefix: classpath:/templates/
+    cache: false
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 
   h2:
     console:

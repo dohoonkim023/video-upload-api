@@ -5,12 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class formController {
+public class FormController {
 
-    @RequestMapping("/form")
+    @RequestMapping("/")
     public String form() {
         return "form";
     }
-
 
 }
