@@ -3,6 +3,8 @@ package com.example.videouploadapi.dto;
 import com.example.videouploadapi.persist.entity.Upload;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class VideoInfolDto {
 
@@ -10,6 +12,7 @@ public class VideoInfolDto {
     private String title;
     private Original original;
     private Resized resized;
+    private LocalDateTime createdAt;
 
     public VideoInfolDto(Upload upload) {
         this.id = upload.getId();
@@ -22,5 +25,6 @@ public class VideoInfolDto {
                                     upload.getResizedWidth(),
                                     upload.getOriginalHeight(),
                                     upload.getResizedVideoUrl());
+        this.createdAt = upload.getCreatedAt();
     }
 }

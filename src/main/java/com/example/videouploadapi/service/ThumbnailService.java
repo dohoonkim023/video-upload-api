@@ -1,12 +1,11 @@
 package com.example.videouploadapi.service;
 
-import com.example.videouploadapi.persist.repository.UploadRepository;
-import lombok.RequiredArgsConstructor;
 import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
 import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
 import net.bramp.ffmpeg.job.FFmpegJob;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +15,12 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class ThumbnailService {
 
-    private static final String UPLOAD_PATH = "src/main/resources/static/video";
-    private static final String ffmpegPath = "/opt/homebrew/bin/ffmpeg";  // -> 설정파일로 빼기
-    private static final String ffprobePath = "/opt/homebrew/bin/ffprobe"; // -> 설정파일로 빼기
-
+    @Value("${video.uploadPath}")
+    private String UPLOAD_PATH;
+    @Value("${video.ffmpegPath}")
+    private String ffmpegPath;
+    @Value("${video.ffprobePath}")
+    private String ffprobePath;
 
     @Async
     public CompletableFuture<String> createThumbnail(String originVideoPath, String resizedFileName) throws IOException {
@@ -38,7 +39,6 @@ public class ThumbnailService {
         job.run();
 
         String result = "true";
-        System.out.println("-----Thumbnail-----");
         return CompletableFuture.completedFuture(result);
 
     }

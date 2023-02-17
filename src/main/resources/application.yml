@@ -34,3 +34,9 @@ spring:
         show_sql: true
         format_sql: true
         default_batch_fetch_size: 1000
+
+video:
+  uploadPath: src/main/resources/static/file
+  ffmpegPath: /opt/homebrew/bin/ffmpeg
+  ffprobePath: /opt/homebrew/bin/ffprobe
+  staticResourcePath: http://localhost:8080/file/

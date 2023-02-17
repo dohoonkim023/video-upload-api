@@ -1,6 +1,5 @@
 package com.example.videouploadapi.api;
 
-import com.example.videouploadapi.dto.VideoInfolDto;
 import com.example.videouploadapi.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +29,6 @@ public class VideoController {
             return new ResponseEntity<>("Invalid content-type", new HttpHeaders(), HttpStatus.BAD_REQUEST);
         }
         videoService.uploadVideo(multipartFile, title);
-        System.out.println("--------3--------");
         return ResponseEntity.ok("Success");
     }
 

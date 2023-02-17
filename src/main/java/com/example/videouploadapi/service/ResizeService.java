@@ -9,6 +9,7 @@ import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
 import net.bramp.ffmpeg.job.FFmpegJob;
 import net.bramp.ffmpeg.probe.FFmpegProbeResult;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +23,22 @@ public class ResizeService {
 
     private final UploadRepository uploadRepository;
 
-    private static final String UPLOAD_PATH = "src/main/resources/static/video";
-    private static final String ffmpegPath = "/opt/homebrew/bin/ffmpeg";  // -> 설정파일로 빼기
-    private static final String ffprobePath = "/opt/homebrew/bin/ffprobe"; // -> 설정파일로 빼기
+    @Value("${video.uploadPath}")
+    private String UPLOAD_PATH;
+    @Value("${video.ffmpegPath}")
+    private String ffmpegPath;
+    @Value("${video.ffprobePath}")
+    private String ffprobePath;
+    @Value("${video.staticResourcePath}")
+    private String staticResourcePath;
 
     private static final int resizedWidth = 360;
 
     @Async
     public CompletableFuture<String> createResizedVideo(Long uploadId, String originalVideoPath, String resizedFileName) throws IOException {
-        //동영상 메타정보 추출??
         FFprobe ffprobec = new FFprobe(ffprobePath);
         FFmpegProbeResult probeResult = ffprobec.probe(originalVideoPath);
 
-        //resizedHeight 구하기
         int width = probeResult.getStreams().get(0).width;
         int height = probeResult.getStreams().get(0).height;
         int resizedHeight = (height * resizedWidth) / width;
@@ -59,11 +63,10 @@ public class ResizeService {
         upload.setResizedFilesize(probeResult.getFormat().size);
         upload.setResizedWidth((long) probeResult.getStreams().get(0).width);
         upload.setResizedHeight((long) probeResult.getStreams().get(0).height);
-        upload.setResizedVideoUrl("http://localhost:8080/video/" + resizedFileName);
+        upload.setResizedVideoUrl(staticResourcePath + resizedFileName);
 
         uploadRepository.save(upload);
         String result = "true";
-        System.out.println("--------2--------");
         return CompletableFuture.completedFuture(result);
 
     }

@@ -17,7 +17,7 @@ public class Upload {
 
     @Id @GeneratedValue
     @Column(name = "uploadId")
-    private Long id; // TODO: 2023/02/13 long이 아닌 Long 인 이유?
+    private Long id;
 
     private String title;
 
