@@ -36,7 +36,7 @@ spring:
         default_batch_fetch_size: 1000
 
 video:
-  uploadPath: /Users/dohoon/desktop/file
-  ffmpegPath: src/main/resources/static/lib/ffmpeg
-  ffprobePath: src/main/resources/static/lib/ffprobe
+  uploadPath: /usr/file
+  ffmpegPath: /usr/bin/ffmpeg
+  ffprobePath: /usr/bin/ffprobe
   staticResourcePath: http://localhost:8080/file/
