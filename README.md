@@ -69,7 +69,7 @@ Use: Spring, JPA, H2, Docker, ffmpeg
   }
   
 # 3. 업로드 직후 영상의 변환 진행률을 수시로 조회할 수 있는 API를 제공
-- 요청 예시
+- [ ] 요청 예시
   GET /video/{id}/progress
 - 응답 예시
   {
