@@ -20,7 +20,7 @@ Use: Spring, JPA, H2, Docker, ffmpeg
    docker 컨테이너에 접속하여 해당 이미지가 생성되었는지 확인한다.
    
    확인방법(mac기준):
-   1. 터미널에서 다음 명령어 실행: docker exec -it  c456623003b1 /bin/bash
+   1. 터미널에서 다음 명령어 실행: docker exec -it [컨테이너 이름 또는 아이디] /bin/bash
    2. cd /usr/file
    3. 이미지 생성여부 확인 
 
