@@ -4,6 +4,7 @@
 Use: Spring, JPA, H2, Docker, ffmpeg
 
 
+
 # 1. 영상 업로드 및 변환 API
 - [x] 파일 포맷은 mp4로 제한하고 1회에 업로드할 수 있는 영상의 최대 용량을 100MB로 제한합니다. 조건에 부합하지 않는 경우 에러를 응답합니다.
 
@@ -23,6 +24,7 @@ Use: Spring, JPA, H2, Docker, ffmpeg
 
         http://localhost:8080/path/to/sample%20video.mp4
         
+
 
 # 2. 영상의 상세 정보를 조회할 수 있는 API를 제공
 - [x] 제목, 생성 시간(업로드 시간), 원본 영상의 주소, 변환한 영상의 주소를 제공합니다.
@@ -56,6 +58,7 @@ Use: Spring, JPA, H2, Docker, ffmpeg
   }
   
   
+  
 # 3. 업로드 직후 영상의 변환 진행률을 수시로 조회할 수 있는 API를 제공
 - [ ] 요청 예시
   GET /video/{id}/progress
@@ -64,6 +67,7 @@ Use: Spring, JPA, H2, Docker, ffmpeg
       "id": 123,
       "progress"
   }
+  
   
   
 # 4. 영상 업로드 후 리사이징 작업 전에 영상의 첫 번째 장면을 썸네일로 추출하여 저장
